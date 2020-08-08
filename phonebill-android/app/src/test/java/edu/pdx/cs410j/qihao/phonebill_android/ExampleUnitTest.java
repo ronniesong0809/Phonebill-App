@@ -1,4 +1,4 @@
-package edu.pdx.cs410j.qihao.phonebill;
+package edu.pdx.cs410j.qihao.phonebill_android;
 
 import org.junit.Test;
 

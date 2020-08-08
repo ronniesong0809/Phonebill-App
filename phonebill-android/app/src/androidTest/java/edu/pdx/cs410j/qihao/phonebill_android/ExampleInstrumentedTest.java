@@ -1,4 +1,4 @@
-package edu.pdx.cs410j.qihao.phonebill;
+package edu.pdx.cs410j.qihao.phonebill_android;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("edu.pdx.cs410j.qihao.phonebill", appContext.getPackageName());
+        assertEquals("edu.pdx.cs410j.qihao.phonebill_android", appContext.getPackageName());
     }
 }
