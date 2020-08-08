@@ -12,10 +12,20 @@
         android:layout_height="wrap_content"
         android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.151" />
+        app:layout_constraintVertical_bias="0.092" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/search_customer"
+        app:layout_constraintEnd_toEndOf="@+id/search_customer"
+        app:layout_constraintStart_toStartOf="@+id/search_customer"
+        app:srcCompat="@drawable/baseline_person_search_24" />
 
     <Button
         android:id="@+id/search_customer"
@@ -27,6 +37,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_phone_call"
+        app:layout_constraintEnd_toEndOf="@+id/add_phone_call"
+        app:layout_constraintStart_toStartOf="@+id/add_phone_call"
+        app:srcCompat="@drawable/baseline_add_ic_call_24" />
+
     <Button
         android:id="@+id/add_phone_call"
         android:layout_width="wrap_content"
@@ -36,6 +56,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_customer" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/search_phone_calls"
+        app:layout_constraintEnd_toEndOf="@+id/search_phone_calls"
+        app:layout_constraintStart_toStartOf="@+id/search_phone_calls"
+        app:srcCompat="@drawable/baseline_search_24" />
 
     <Button
         android:id="@+id/search_phone_calls"
@@ -47,16 +76,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_phone_call" />
 
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/read_me"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.864"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.922"
-        app:srcCompat="@android:drawable/ic_menu_help" />
+        app:srcCompat="@drawable/baseline_help_outline_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -55,17 +55,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2/2/2222 2:2 PM"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/add_phone_call_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/startTime" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/add_phone_call_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="Add"
         app:layout_constraintTop_toBottomOf="@+id/endTime"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
