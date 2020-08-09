@@ -4,19 +4,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 
 import edu.pdx.cs410J.ParserException;
 
@@ -35,19 +42,35 @@ public class AddPhoneCall extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_phone_call);
 
-        final EditText startTime = findViewById(R.id.startTime);
-        startTime.setOnClickListener(new View.OnClickListener() {
+        final EditText startDate_et = findViewById(R.id.startDate_editText);
+        startDate_et.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                datePick(startTime);
+                datePick(startDate_et);
             }
         });
 
-        final EditText endTime = findViewById(R.id.endTime);
-        endTime.setOnClickListener(new View.OnClickListener() {
+        final EditText endDate_et = findViewById(R.id.endDate_editText);
+        endDate_et.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                datePick(endTime);
+                datePick(endDate_et);
+            }
+        });
+
+        final EditText startTime_et = findViewById(R.id.startTime_editText);
+        startTime_et.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timePick(startTime_et);
+            }
+        });
+
+        final EditText endTime_et = findViewById(R.id.endTime_editText);
+        endTime_et.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timePick(endTime_et);
             }
         });
 
@@ -73,9 +96,36 @@ public class AddPhoneCall extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                editText.setText(day + "/" + month + "/" + year);
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, day);
+
+                @SuppressLint("SimpleDateFormat")
+                SimpleDateFormat format = new SimpleDateFormat("MM/dd/YYYY");
+                String date = format.format(calendar.getTime());
+                editText.setText(date);
             }
         }, startYear, startMonth, startDay);
+        dialog.show();
+    }
+
+    private void timePick(final EditText editText) {
+        final Calendar calendar = Calendar.getInstance();
+        int startHour = calendar.get(Calendar.HOUR_OF_DAY);
+        int startMinute = calendar.get(Calendar.MINUTE);
+        TimePickerDialog dialog = new TimePickerDialog(AddPhoneCall.this, new TimePickerDialog.OnTimeSetListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                calendar.set(Calendar.HOUR_OF_DAY, hour);
+                calendar.set(Calendar.MINUTE, minute);
+
+                @SuppressLint("SimpleDateFormat")
+                SimpleDateFormat format = new SimpleDateFormat("hh:mm a");
+                String time = format.format(calendar.getTime());
+                editText.setText(time);
+            }
+        }, startHour, startMinute, false);
         dialog.show();
     }
 
@@ -85,8 +135,8 @@ public class AddPhoneCall extends AppCompatActivity {
         customer = findViewById(R.id.customer);
         caller = findViewById(R.id.caller);
         callee = findViewById(R.id.callee);
-        start = findViewById(R.id.startTime);
-        end = findViewById(R.id.endTime);
+        start = findViewById(R.id.startTime_editText);
+        end = findViewById(R.id.endTime_editText);
 
         String Customer = customer.getText().toString();
         String Caller = caller.getText().toString();

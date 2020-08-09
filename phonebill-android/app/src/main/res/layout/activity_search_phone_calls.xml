@@ -11,25 +11,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ronnie"
-        app:layout_constraintBottom_toTopOf="@+id/startTime"
+        app:layout_constraintBottom_toTopOf="@+id/startTime_editText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/startTime"
+        android:id="@+id/startTime_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1/1/1111 1:1 AM"
-        app:layout_constraintBottom_toTopOf="@+id/endTime"
+        app:layout_constraintBottom_toTopOf="@+id/endTime_editText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/customer" />
 
     <EditText
-        android:id="@+id/endTime"
+        android:id="@+id/endTime_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="2/2/2222 2:2 PM"
@@ -37,14 +37,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startTime" />
+        app:layout_constraintTop_toBottomOf="@+id/startTime_editText" />
 
     <Button
         android:id="@+id/search_phone_calls_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search"
-        app:layout_constraintTop_toBottomOf="@+id/endTime"
+        app:layout_constraintTop_toBottomOf="@+id/endTime_editText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -10,67 +10,171 @@
         android:id="@+id/customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ronnie"
+        android:hint="@string/name_format"
+        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/caller"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/caller"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="111-111-1111"
+        android:hint="@string/number_format"
+        android:inputType="phone"
+        android:lines="1"
+        android:maxLength="12"
         app:layout_constraintBottom_toTopOf="@+id/callee"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customer" />
+        app:layout_constraintTop_toBottomOf="@+id/customer"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/callee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="222-222-2222"
-        app:layout_constraintBottom_toTopOf="@+id/startTime"
+        android:hint="@string/number_format"
+        android:inputType="phone"
+        android:lines="1"
+        android:maxLength="12"
+        app:layout_constraintBottom_toTopOf="@+id/start_linear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/caller" />
+        app:layout_constraintTop_toBottomOf="@+id/caller"
+        android:importantForAutofill="no" />
 
-    <EditText
-        android:id="@+id/startTime"
+    <LinearLayout
+        android:id="@+id/start_linear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/date_format"
-        android:focusable="false"
-        app:layout_constraintBottom_toTopOf="@+id/endTime"
+        app:layout_constraintBottom_toTopOf="@+id/end_linear"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/callee" />
+        app:layout_constraintTop_toBottomOf="@+id/callee"
+        tools:ignore="MissingConstraints">
 
-    <EditText
-        android:id="@+id/endTime"
+        <ImageView
+            android:id="@+id/date_range_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/baseline_date_range_24"
+            android:contentDescription="@string/date_range_image" />
+
+        <EditText
+            android:id="@+id/startDate_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:hint="@string/date_format"
+            android:inputType="date"
+            android:importantForAutofill="no" />
+
+        <ImageView
+            android:id="@+id/time_range_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/baseline_access_time_24"
+            android:contentDescription="@string/time_range_image" />
+
+        <EditText
+            android:id="@+id/startTime_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:inputType="time"
+            android:hint="@string/time_format"
+            android:importantForAutofill="no" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/end_linear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/date_format"
-        android:focusable="false"
         app:layout_constraintBottom_toTopOf="@+id/add_phone_call_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startTime" />
+        app:layout_constraintTop_toBottomOf="@+id/start_linear"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/date_range_image2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/baseline_date_range_24"
+            android:contentDescription="@string/date_range_image" />
+
+        <EditText
+            android:id="@+id/endDate_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:inputType="date"
+            android:hint="@string/date_format"
+            android:importantForAutofill="no" />
+
+        <ImageView
+            android:id="@+id/time_range_image2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/baseline_access_time_24"
+            android:contentDescription="@string/time_range_image" />
+
+        <EditText
+            android:id="@+id/endTime_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="false"
+            android:inputType="time"
+            android:hint="@string/time_format"
+            android:importantForAutofill="no" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/add_phone_call_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
-        app:layout_constraintTop_toBottomOf="@+id/endTime"
+        android:text="@string/add"
+        app:layout_constraintTop_toBottomOf="@+id/end_linear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/caller"
+        app:layout_constraintEnd_toStartOf="@+id/caller"
+        app:layout_constraintTop_toTopOf="@+id/caller"
+        app:srcCompat="@drawable/baseline_phone_24" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/callee"
+        app:layout_constraintEnd_toStartOf="@+id/callee"
+        app:layout_constraintTop_toTopOf="@+id/callee"
+        app:srcCompat="@drawable/baseline_phone_enabled_24" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/customer"
+        app:layout_constraintEnd_toStartOf="@+id/customer"
+        app:layout_constraintTop_toTopOf="@+id/customer"
+        app:srcCompat="@drawable/baseline_person_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
