@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Phone Bill</string>
+    <string name="date_format">MM/DD/YYYY</string>
 </resources>
