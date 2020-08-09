@@ -11,7 +11,7 @@ import edu.pdx.cs410J.AbstractPhoneBill;
  */
 public class PhoneBill extends AbstractPhoneBill<PhoneCall> {
     private final String customer;
-    private final SortedSet<PhoneCall> calls = new TreeSet<PhoneCall>();
+    private final SortedSet<PhoneCall> calls = new TreeSet<>();
 
     /**
      * Creates a new <code>Student</code>

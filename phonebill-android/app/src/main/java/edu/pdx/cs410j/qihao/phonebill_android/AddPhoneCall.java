@@ -18,12 +18,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
 
 import edu.pdx.cs410J.ParserException;
 
@@ -161,7 +157,7 @@ public class AddPhoneCall extends AppCompatActivity {
             call = new PhoneCall(Caller, Callee, Start, End);
             bill.addPhoneCall(call);
         }
-        TextDumper dumper = new TextDumper(new PrintWriter(file));;
+        TextDumper dumper = new TextDumper(new PrintWriter(file));
         dumper.dump(bill);
 
         intent.putExtra("PhoneCall", call);

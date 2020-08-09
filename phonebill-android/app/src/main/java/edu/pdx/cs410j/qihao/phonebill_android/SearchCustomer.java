@@ -13,9 +13,6 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.PrintWriter;
-import java.io.Reader;
-import java.util.Collection;
 
 import edu.pdx.cs410J.ParserException;
 
@@ -34,7 +31,7 @@ public class SearchCustomer extends AppCompatActivity {
                 String Customer = customer.getText().toString();
 
                 File dir = getDataDir();
-                File file = new File(dir, "Ronnie.txt");
+                File file = new File(dir, Customer + ".txt");
                 TextParser parser;
                 PhoneBill bill = null;
                 try {
@@ -44,8 +41,9 @@ public class SearchCustomer extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                alert(bill);
-
+                if (bill != null) {
+                    alert(bill);
+                }
             }
         });
     }
