@@ -18,7 +18,24 @@ public class PhoneBill extends AbstractPhoneBill<PhoneCall> {
      * @param customer name of customer
      */
     public PhoneBill(String customer) {
-        this.customer = customer;
+        this.customer = validateName(customer);
+    }
+
+    /**
+     * Validate the format of <code>time</code>.
+     * @param customer Format: XXXXX
+     * @return return customer name if valid, else throw exception.
+     */
+    private String validateName(String customer) {
+        if (customer.equals("")) {
+            throw new IllegalArgumentException("customer can't be empty.");
+        }
+        boolean valid = customer.matches("[a-zA-Z0-9]{3,12}|[a-zA-Z0-9]{3,12} [a-zA-Z0-9]{3,12}");
+        if(valid) {
+            return customer;
+        } else {
+            throw new IllegalArgumentException("[" + customer + "] is an incorrect Customer Name format.");
+        }
     }
 
     /**

@@ -27,8 +27,10 @@ public class AddPhoneCall extends AppCompatActivity {
     EditText customer;
     EditText caller;
     EditText callee;
-    EditText start;
-    EditText end;
+    EditText startDate;
+    EditText startTime;
+    EditText endDate;
+    EditText endTime;
 
     PhoneCall call;
     PhoneBill bill;
@@ -76,7 +78,14 @@ public class AddPhoneCall extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     addCall();
-                } catch (ParserException | IOException e) {
+
+                    Intent intent = new Intent(AddPhoneCall.this, MainActivity.class);
+                    intent.putExtra("PhoneCall", call);
+                    intent.putExtra("PhoneBill", bill);
+
+                    setResult(RESULT_OK, intent);
+                    finish();
+                } catch (ParserException | IOException | IllegalArgumentException e) {
                     error(e);
                 }
             }
@@ -125,20 +134,22 @@ public class AddPhoneCall extends AppCompatActivity {
         dialog.show();
     }
 
-    private void addCall() throws IOException, ParserException {
-        Intent intent = new Intent(AddPhoneCall.this, MainActivity.class);
-
+    private void addCall() throws IOException, ParserException, IllegalArgumentException {
         customer = findViewById(R.id.customer);
         caller = findViewById(R.id.caller);
         callee = findViewById(R.id.callee);
-        start = findViewById(R.id.startTime_editText);
-        end = findViewById(R.id.endTime_editText);
+        startDate = findViewById(R.id.startDate_editText);
+        startTime = findViewById(R.id.startTime_editText);
+        endDate = findViewById(R.id.endDate_editText);
+        endTime = findViewById(R.id.endTime_editText);
 
         String Customer = customer.getText().toString();
         String Caller = caller.getText().toString();
         String Callee = callee.getText().toString();
-        String Start = start.getText().toString();
-        String End = end.getText().toString();
+        String StartDate = startDate.getText().toString();
+        String StartTime = startTime.getText().toString();
+        String EndDate = endDate.getText().toString();
+        String EndTime = endTime.getText().toString();
 
         File dir = getDataDir();
         File file = new File(dir, Customer + ".txt");
@@ -147,27 +158,21 @@ public class AddPhoneCall extends AppCompatActivity {
             TextParser parser = new TextParser(new FileReader(file));
             bill = parser.parse();
             if (bill.getCustomer().equals(Customer)){
-                call = new PhoneCall(Caller, Callee, Start, End);
+                call = new PhoneCall(Caller, Callee, StartDate, StartTime, EndDate, EndTime);
                 bill.addPhoneCall(call);
             } else {
                 throw new IllegalArgumentException("The customer name given [" + Customer + "] is different than the one found in the stored file [" + bill.getCustomer() + "]");
             }
         } else {
             bill = new PhoneBill(Customer);
-            call = new PhoneCall(Caller, Callee, Start, End);
+            call = new PhoneCall(Caller, Callee, StartDate, StartTime, EndDate, EndTime);
             bill.addPhoneCall(call);
         }
         TextDumper dumper = new TextDumper(new PrintWriter(file));
         dumper.dump(bill);
-
-        intent.putExtra("PhoneCall", call);
-        intent.putExtra("PhoneBill", bill);
-
-        setResult(RESULT_OK, intent);
-        finish();
     }
 
     private void error(Exception e) {
-        Toast.makeText(this, "x" + e.getMessage(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
     }
 }
