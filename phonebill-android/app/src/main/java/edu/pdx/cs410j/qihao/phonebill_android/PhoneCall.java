@@ -15,18 +15,15 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
      * Creates a new <code>PhoneCall</code>
      * @param caller     Phone number of caller
      * @param callee     Phone number of person who was called
-     * @param startDate  date of call began
      * @param startTime  time of call began
-     * @param startAmPm  ampm of call began
-     * @param endDate    date of call ended
      * @param endTime    time of call ended
-     * @param endAmPm    ampm of call ended
      */
-    public PhoneCall(String caller, String callee, String startDate, String startTime, String startAmPm, String endDate, String endTime, String endAmPm) {
+    //public PhoneCall(String caller, String callee, String startDate, String startTime, String startAmPm, String endDate, String endTime, String endAmPm) {
+    public PhoneCall(String caller, String callee, String startTime, String endTime) {
         this.caller = caller;
         this.callee = callee;
-        this.startTime = startDate + " " + startTime + " " + startAmPm;
-        this.endTime = endDate + " " + endTime + " " + endAmPm;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**

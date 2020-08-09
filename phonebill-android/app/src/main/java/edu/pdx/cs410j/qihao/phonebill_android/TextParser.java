@@ -39,16 +39,8 @@ public class TextParser implements PhoneBillParser<PhoneBill> {
                 if (caller == null) {
                     break;
                 }
-                String[] start = _start.split(" ");
-                String[] end = _end.split(" ");
-                String startDate = start[0];
-                String startTime = start[1];
-                String startAmPm = start[2];
-                String endDate = end[0];
-                String endTime = end[1];
-                String endAmPm = end[2];
 
-                bill.addPhoneCall(new PhoneCall(caller, callee, startDate, startTime, startAmPm, endDate, endTime, endAmPm));
+                bill.addPhoneCall(new PhoneCall(caller, callee, _start, _end));
             }
             return bill;
 
