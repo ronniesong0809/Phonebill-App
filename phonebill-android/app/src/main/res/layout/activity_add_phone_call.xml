@@ -6,48 +6,85 @@
     android:layout_height="match_parent"
     tools:context=".AddPhoneCall">
 
-    <EditText
-        android:id="@+id/customer"
+    <LinearLayout
+        android:id="@+id/customer_linear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/name_format"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/caller"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintBottom_toTopOf="@+id/caller_linear">
 
-    <EditText
-        android:id="@+id/caller"
+        <ImageView
+            android:id="@+id/customer_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/baseline_person_24"
+            android:contentDescription="@string/customer_image" />
+
+        <EditText
+            android:id="@+id/customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/name_format"
+            android:importantForAutofill="no"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/caller_linear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/number_format"
-        android:inputType="phone"
-        android:lines="1"
-        android:maxLength="12"
-        app:layout_constraintBottom_toTopOf="@+id/callee"
+        app:layout_constraintBottom_toTopOf="@id/callee_linear"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customer"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/customer_linear">
 
-    <EditText
-        android:id="@+id/callee"
-        android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/caller_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_phone_24"
+            android:contentDescription="@string/caller_image" />
+
+        <EditText
+            android:id="@+id/caller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/number_format"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            android:lines="1"
+            android:maxLength="12" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/callee_linear"
         android:layout_height="wrap_content"
-        android:hint="@string/number_format"
-        android:inputType="phone"
-        android:lines="1"
-        android:maxLength="12"
+        android:layout_width="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/start_linear"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/caller"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/caller_linear">
+
+        <ImageView
+            android:id="@+id/callee_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/baseline_phone_enabled_24"
+            android:contentDescription="@string/callee_image" />
+
+        <EditText
+            android:id="@+id/callee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/number_format"
+            android:inputType="phone"
+            android:lines="1"
+            android:maxLength="12"
+            android:importantForAutofill="no" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/start_linear"
@@ -56,8 +93,7 @@
         app:layout_constraintBottom_toTopOf="@+id/end_linear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/callee"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toBottomOf="@+id/callee_linear">
 
         <ImageView
             android:id="@+id/date_range_image"
@@ -102,8 +138,7 @@
         app:layout_constraintBottom_toTopOf="@+id/add_phone_call_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_linear"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toBottomOf="@+id/start_linear">
 
         <ImageView
             android:id="@+id/date_range_image2"
@@ -149,32 +184,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/caller"
-        app:layout_constraintEnd_toStartOf="@+id/caller"
-        app:layout_constraintTop_toTopOf="@+id/caller"
-        app:srcCompat="@drawable/baseline_phone_24" />
-
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/callee"
-        app:layout_constraintEnd_toStartOf="@+id/callee"
-        app:layout_constraintTop_toTopOf="@+id/callee"
-        app:srcCompat="@drawable/baseline_phone_enabled_24" />
-
-    <ImageView
-        android:id="@+id/imageView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/customer"
-        app:layout_constraintEnd_toStartOf="@+id/customer"
-        app:layout_constraintTop_toTopOf="@+id/customer"
-        app:srcCompat="@drawable/baseline_person_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

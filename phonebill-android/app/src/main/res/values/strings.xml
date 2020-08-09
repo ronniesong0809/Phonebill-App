@@ -2,9 +2,12 @@
     <string name="app_name">Phone Bill</string>
     <string name="date_format">MM/DD/YYYY</string>
     <string name="time_format">HH:MM AmPm</string>
-    <string name="number_format">111-111-1111</string>
+    <string name="number_format">XXX-XXX-XXXX</string>
     <string name="name_format">Customer</string>
     <string name="date_range_image">date range image</string>
     <string name="time_range_image">time range image</string>
     <string name="add">Add</string>
+    <string name="customer_image">customer image</string>
+    <string name="caller_image">caller image</string>
+    <string name="callee_image">callee image</string>
 </resources>
