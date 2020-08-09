@@ -10,4 +10,5 @@
     <string name="customer_image">customer image</string>
     <string name="caller_image">caller image</string>
     <string name="callee_image">callee image</string>
+    <string name="search">Search</string>
 </resources>

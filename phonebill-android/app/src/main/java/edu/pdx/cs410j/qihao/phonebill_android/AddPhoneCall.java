@@ -7,6 +7,8 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -39,6 +41,14 @@ public class AddPhoneCall extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_phone_call);
+
+        EditText caller_et = findViewById(R.id.caller);
+        //caller_et.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+        caller_et.addTextChangedListener(NumberWatcher(caller_et));
+
+        EditText callee_et = findViewById(R.id.callee);
+        //callee_et.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+        callee_et.addTextChangedListener(NumberWatcher(callee_et));
 
         final EditText startDate_et = findViewById(R.id.startDate_editText);
         startDate_et.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +100,34 @@ public class AddPhoneCall extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private TextWatcher NumberWatcher(final EditText caller_et) {
+        final String[] lastChar = {" "};
+
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int digits = caller_et.getText().toString().length();
+                if (digits > 1)
+                    lastChar[0] = caller_et.getText().toString().substring(digits-1);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int digits = caller_et.getText().toString().length();
+                if (!lastChar[0].equals("-")) {
+                    if (digits == 3 || digits == 7) {
+                        caller_et.append("-");
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        };
     }
 
     private void datePick(final EditText editText) {

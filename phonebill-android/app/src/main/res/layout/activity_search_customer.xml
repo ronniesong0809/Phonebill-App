@@ -6,23 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".SearchCustomer">
 
-    <EditText
-        android:id="@+id/customer"
+    <LinearLayout
+        android:id="@+id/customer_linear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ronnie"
-        app:layout_constraintBottom_toTopOf="@+id/search_customer_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/search_customer_button">
+
+        <ImageView
+            android:id="@+id/customer_image"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/baseline_person_search_24"
+            android:contentDescription="@string/customer_image" />
+
+        <EditText
+            android:id="@+id/customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/name_format"
+            android:importantForAutofill="no"
+            android:inputType="text" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/search_customer_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search"
-        app:layout_constraintTop_toBottomOf="@+id/customer"
+        android:text="@string/search"
+        app:layout_constraintTop_toBottomOf="@+id/customer_linear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

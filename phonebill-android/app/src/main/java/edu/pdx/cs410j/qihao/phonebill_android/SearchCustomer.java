@@ -27,25 +27,32 @@ public class SearchCustomer extends AppCompatActivity {
         searchCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText customer = findViewById(R.id.customer);
-                String Customer = customer.getText().toString();
-
-                File dir = getDataDir();
-                File file = new File(dir, Customer + ".txt");
-                TextParser parser;
-                PhoneBill bill = null;
                 try {
-                    parser = new TextParser(new FileReader(file));
-                    bill = parser.parse();
-                } catch (FileNotFoundException | ParserException e) {
-                    e.printStackTrace();
-                }
-
-                if (bill != null) {
-                    alert(bill);
+                    search();
+                } catch (FileNotFoundException | ParserException | IllegalArgumentException e) {
+                    error(e);
                 }
             }
         });
+    }
+
+    private void search() throws FileNotFoundException, ParserException {
+        EditText customer = findViewById(R.id.customer);
+        String Customer = customer.getText().toString();
+        if (Customer.equals("")) {
+            throw new IllegalArgumentException("customer can't be empty.");
+        }
+
+        File dir = getDataDir();
+        File file = new File(dir, Customer + ".txt");
+        if (file.exists()) {
+            TextParser parser = new TextParser(new FileReader(file));
+            PhoneBill bill = parser.parse();
+
+            alert(bill);
+        } else {
+            throw new IllegalArgumentException("No such customer: " + Customer);
+        }
     }
 
     private void alert(PhoneBill bill) {
@@ -60,5 +67,13 @@ public class SearchCustomer extends AppCompatActivity {
                     }
                 })
                 .show();
+    }
+
+    private void error(Exception e) {
+        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+    }
+
+    private void error(String e) {
+        Toast.makeText(this, e, Toast.LENGTH_LONG).show();
     }
 }
