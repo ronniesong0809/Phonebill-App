@@ -11,7 +11,7 @@ public class TextParser implements PhoneBillParser<PhoneBill> {
     private final Reader reader;
 
     /**
-     * Creates a new <code>PhoneBillTextParser</code>
+     * Creates a new <code>TextParser</code>
      * @param reader Reader object
      */
     public TextParser(Reader reader) {
@@ -20,7 +20,7 @@ public class TextParser implements PhoneBillParser<PhoneBill> {
 
     /**
      * parse PhoneBill from file
-     * @return AbstractPhoneBill object
+     * @return PhoneBill object
      * @throws ParserException throws parser exception
      */
     @Override

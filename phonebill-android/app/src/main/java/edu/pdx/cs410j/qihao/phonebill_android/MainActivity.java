@@ -4,17 +4,25 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.StatusBarManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.service.notification.StatusBarNotification;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+/**
+ * This class is represents a <code>MainActivity</code>.
+ */
 public class MainActivity extends AppCompatActivity {
+    public static final int ADD_PHONE_CALL_RESULT = 43;
 
-    public static final int ADDPHONECALL_RESULT = 43;
-
+    /**
+     * initialize MainActivity activity
+     * @param savedInstanceState containing the activity's previously frozen state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, AddPhoneCall.class);
-                startActivityForResult(intent, ADDPHONECALL_RESULT);
+                startActivityForResult(intent, ADD_PHONE_CALL_RESULT);
             }
         });
 
@@ -55,19 +63,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * get result from another activity
+     * @param requestCode request code
+     * @param resultCode result code
+     * @param data intent data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADDPHONECALL_RESULT && resultCode == RESULT_OK) {
+        if (requestCode == ADD_PHONE_CALL_RESULT && resultCode == RESULT_OK) {
             if (data != null) {
                 if (data.hasExtra("PhoneCall")) {
                     PhoneCall result = (PhoneCall) data.getSerializableExtra("PhoneCall");
-                    Toast.makeText(this, "PhoneCall: " + result, Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "New Call:\n" + result + "\nhas been successfully added!", Toast.LENGTH_LONG).show();
                 }
 
                 if (data.hasExtra("PhoneBill")) {
                     PhoneBill result = (PhoneBill) data.getSerializableExtra("PhoneBill");
-                    Toast.makeText(this, "PhoneBill: " + result, Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Current PhoneBill: " + result, Toast.LENGTH_LONG).show();
+
                 }
             } else {
                 Toast.makeText(this, "Nothing change", Toast.LENGTH_LONG).show();
@@ -75,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * README alert dialog
+     */
     public void ReadMe() {
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setIcon(R.drawable.baseline_help_outline_24)

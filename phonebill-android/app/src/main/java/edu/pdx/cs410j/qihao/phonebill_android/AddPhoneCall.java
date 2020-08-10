@@ -14,7 +14,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
-import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.io.FileReader;
@@ -25,6 +26,9 @@ import java.util.Calendar;
 
 import edu.pdx.cs410J.ParserException;
 
+/**
+ * This class is represents a <code>AddPhoneCall</code>.
+ */
 public class AddPhoneCall extends AppCompatActivity {
     EditText customer;
     EditText caller;
@@ -37,6 +41,10 @@ public class AddPhoneCall extends AppCompatActivity {
     PhoneCall call;
     PhoneBill bill;
 
+    /**
+     * initialize AddPhoneCall activity
+     * @param savedInstanceState containing the activity's previously frozen state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +110,11 @@ public class AddPhoneCall extends AppCompatActivity {
         });
     }
 
+    /**
+     * custom phone number pattern TextWatcher that auto append dash
+     * @param caller_et caller EditText
+     * @return TextWatcher
+     */
     private TextWatcher NumberWatcher(final EditText caller_et) {
         final String[] lastChar = {" "};
 
@@ -130,6 +143,10 @@ public class AddPhoneCall extends AppCompatActivity {
         };
     }
 
+    /**
+     * DatePicker to pick date
+     * @param editText Date EditText
+     */
     private void datePick(final EditText editText) {
         final Calendar calendar = Calendar.getInstance();
         int startYear = calendar.get(Calendar.YEAR);
@@ -152,6 +169,10 @@ public class AddPhoneCall extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * TimePicker to pick time
+     * @param editText Time EditText
+     */
     private void timePick(final EditText editText) {
         final Calendar calendar = Calendar.getInstance();
         int startHour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -172,6 +193,12 @@ public class AddPhoneCall extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * add Phone Call to bill then dump to internal storage
+     * @throws IOException throws IO exception
+     * @throws ParserException throws ParserException exception
+     * @throws IllegalArgumentException throws IllegalArgument exception
+     */
     private void addCall() throws IOException, ParserException, IllegalArgumentException {
         customer = findViewById(R.id.customer);
         caller = findViewById(R.id.caller);
@@ -210,7 +237,16 @@ public class AddPhoneCall extends AppCompatActivity {
         dumper.dump(bill);
     }
 
+    /**
+     * show error in Snackbar
+     * @param e exception
+     */
     private void error(Exception e) {
-        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        String text = e.getMessage();
+        if (text == null) {
+            text = "Unexpected error occurred!";
+        }
+        //Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG).show();
     }
 }

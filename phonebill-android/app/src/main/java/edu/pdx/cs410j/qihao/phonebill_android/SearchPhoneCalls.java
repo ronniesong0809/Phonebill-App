@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,9 +13,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.io.FileReader;
@@ -30,8 +29,15 @@ import java.util.NoSuchElementException;
 
 import edu.pdx.cs410J.ParserException;
 
+/**
+ * This class is represents a <code>SearchPhoneCalls</code>.
+ */
 public class SearchPhoneCalls extends AppCompatActivity {
 
+    /**
+     * initialize SearchPhoneCalls activity
+     * @param savedInstanceState containing the activity's previously frozen state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,15 +94,15 @@ public class SearchPhoneCalls extends AppCompatActivity {
                     String endTime = time2.getText().toString();
 
                     if (Customer.equals("")) {
-                        throw new IllegalArgumentException("customer can't be empty.");
+                        throw new IllegalArgumentException("Customer can't be empty.");
                     } else if (startDate.equals("")) {
-                        throw new IllegalArgumentException("date1 can't be empty.");
+                        throw new IllegalArgumentException("Start date can't be empty.");
                     } else if (startTime.equals("")) {
-                        throw new IllegalArgumentException("time1 can't be empty.");
+                        throw new IllegalArgumentException("Start time can't be empty.");
                     } else if (endDate.equals("")) {
-                        throw new IllegalArgumentException("date2 can't be empty.");
+                        throw new IllegalArgumentException("End date can't be empty.");
                     } else if (endTime.equals("")) {
-                        throw new IllegalArgumentException("time2 can't be empty.");
+                        throw new IllegalArgumentException("End time can't be empty.");
                     }
 
                     search(Customer, startDate + " " + startTime, endDate + " " + endTime);
@@ -107,6 +113,10 @@ public class SearchPhoneCalls extends AppCompatActivity {
         });
     }
 
+    /**
+     * DatePicker to pick date
+     * @param editText Date EditText
+     */
     private void datePick(final EditText editText) {
         final Calendar calendar = Calendar.getInstance();
         int startYear = calendar.get(Calendar.YEAR);
@@ -129,6 +139,10 @@ public class SearchPhoneCalls extends AppCompatActivity {
         dialog.show();
     }
 
+    /**
+     * TimePicker to pick time
+     * @param editText Time EditText
+     */
     private void timePick(final EditText editText) {
         final Calendar calendar = Calendar.getInstance();
         int startHour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -157,6 +171,8 @@ public class SearchPhoneCalls extends AppCompatActivity {
      */
     @SuppressLint("SimpleDateFormat")
     private void search(String Customer, String date1, String date2) throws IOException, ParserException, IllegalArgumentException {
+        validateStartTimeBeforeEndTime(parseDate(date1), parseDate(date2));
+
         File dir = getDataDir();
         File file = new File(dir, Customer + ".txt");
         if (file.exists()) {
@@ -218,12 +234,11 @@ public class SearchPhoneCalls extends AppCompatActivity {
     private boolean betweenTwoTimes(PhoneCall call, String _date1, String _date2) throws IllegalArgumentException {
         Date date1 = parseDate(_date1);
         Date date2 = parseDate(_date2);
-        validateStartTimeBeforeEndTime(date1, date2);
         return call.getStartTime().after(date1) && call.getStartTime().before(date2);
     }
 
     /**
-     * reformat to EEEEE, MMMM d, yyyy - hh:mm a
+     * reformat to EEE, MMM d, yyyy - hh:mm a
      * @param time time as Date object
      * @return String of new format
      */
@@ -262,7 +277,16 @@ public class SearchPhoneCalls extends AppCompatActivity {
         }
     }
 
+    /**
+     * show error in Snackbar
+     * @param e exception
+     */
     private void error(Exception e) {
-        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        String text = e.getMessage();
+        if (text == null) {
+            text = "Unexpected error occurred!";
+        }
+        //Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG).show();
     }
 }

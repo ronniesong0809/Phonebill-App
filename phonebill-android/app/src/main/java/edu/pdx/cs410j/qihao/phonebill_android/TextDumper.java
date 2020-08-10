@@ -12,8 +12,7 @@ public class TextDumper implements PhoneBillDumper<PhoneBill> {
     private final PrintWriter writer;
 
     /**
-     * Creates a new <code>PhoneBillTextDumper</code>
-     *
+     * Creates a new <code>TextDumper</code>
      * @param writer PrintWriter object
      */
     TextDumper(PrintWriter writer) {
@@ -22,8 +21,7 @@ public class TextDumper implements PhoneBillDumper<PhoneBill> {
     }
 
     /**
-     * dump PhoneBill to via Rest
-     *
+     * dump PhoneBill to internal storage
      * @param bill PhoneBill object
      * @throws IOException throws IO exception
      */

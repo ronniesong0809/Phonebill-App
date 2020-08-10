@@ -3,17 +3,15 @@ package edu.pdx.cs410j.qihao.phonebill_android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.io.FileReader;
@@ -24,8 +22,15 @@ import java.util.Date;
 
 import edu.pdx.cs410J.ParserException;
 
+/**
+ * This class is represents a <code>SearchCustomer</code>.
+ */
 public class SearchCustomer extends AppCompatActivity {
 
+    /**
+     * initialize SearchCustomer activity
+     * @param savedInstanceState containing the activity's previously frozen state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +49,11 @@ public class SearchCustomer extends AppCompatActivity {
         });
     }
 
+    /**
+     * standard out PhoneBill in pretty format
+     * @throws IOException throws IO exception
+     * @throws ParserException throws ParserException exception
+     */
     @SuppressLint("SimpleDateFormat")
     private void search() throws IOException, ParserException {
         EditText customer = findViewById(R.id.customer);
@@ -86,10 +96,9 @@ public class SearchCustomer extends AppCompatActivity {
 
                 callArray.add(builder);
             }
+
             adapter.notifyDataSetChanged();
-
             listView.setAdapter(adapter);
-
         } else {
             throw new IllegalArgumentException("No such customer: " + Customer);
         }
@@ -106,7 +115,16 @@ public class SearchCustomer extends AppCompatActivity {
         return simpleDateFormat.format(time);
     }
 
+    /**
+     * show error in Snackbar
+     * @param e exception
+     */
     private void error(Exception e) {
-        Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        String text = e.getMessage();
+        if (text == null) {
+            text = "Unexpected error occurred!";
+        }
+        //Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG).show();
     }
 }
