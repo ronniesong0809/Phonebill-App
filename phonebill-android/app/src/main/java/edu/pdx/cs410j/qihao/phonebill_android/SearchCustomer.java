@@ -1,16 +1,12 @@
 package edu.pdx.cs410j.qihao.phonebill_android;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,10 +14,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import edu.pdx.cs410J.ParserException;
 
@@ -38,16 +35,15 @@ public class SearchCustomer extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     search();
-                } catch (FileNotFoundException | ParserException | IllegalArgumentException e) {
-                    error(e);
-                } catch (Exception e) {
+                } catch (ParserException | IllegalArgumentException | IOException e) {
                     error(e);
                 }
             }
         });
     }
 
-    private void search() throws FileNotFoundException, ParserException {
+    @SuppressLint("SimpleDateFormat")
+    private void search() throws IOException, ParserException {
         EditText customer = findViewById(R.id.customer);
         String Customer = customer.getText().toString();
         if (Customer.equals("")) {
@@ -64,10 +60,21 @@ public class SearchCustomer extends AppCompatActivity {
             ListView listView = findViewById(R.id.result_list);
             ArrayList<String> callArray = new ArrayList<>();
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(SearchCustomer.this, android.R.layout.simple_list_item_1, callArray);
-            callArray.add(bill.getCustomer());
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(SearchCustomer.this, R.layout.list_item, callArray);
+
+            callArray.add(String.format("%-15s %s", "", bill.getCustomer() + "'s Phone Bill"));
             for (PhoneCall call: bill.getPhoneCalls()) {
-                callArray.add(call.toString());
+                long duration = call.getEndTime().getTime() - call.getStartTime().getTime();
+
+                String builder = "\n-----------" + call.getStartTime() + "----------\n";
+                builder += String.format("%-15s %s\n", "Caller Number:", call.getCaller());
+                builder += String.format("%-15s %s\n", "Callee Number:", call.getCallee());
+                builder += String.format("%-15s %s\n", "Start Time:", reformat(call.getStartTime()));
+                builder += String.format("%-15s %s\n", "End Time:", reformat(call.getEndTime()));
+                builder += String.format("%-15s %s\n", "Time Zone:", new SimpleDateFormat().getTimeZone().toZoneId());
+                builder += String.format("%-15s %s\n", "Call Duration:", duration / 1000 / 60 + " minutes (" + duration / 1000 + " seconds)");
+
+                callArray.add(builder);
             }
             adapter.notifyDataSetChanged();
 
@@ -78,46 +85,18 @@ public class SearchCustomer extends AppCompatActivity {
         }
     }
 
-    private void alert(PhoneBill bill) {
-        new AlertDialog.Builder(this)
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle(bill.getCustomer())
-                .setMessage(bill.getPhoneCalls().toString())
-                .setNegativeButton("Continue", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getApplicationContext(), "Please Click Something", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .show();
+    /**
+     * reformat to EEEEE, MMMM d, yyyy - hh:mm a
+     * @param time time as Date object
+     * @return String of new format
+     */
+    @SuppressLint("SimpleDateFormat")
+    private String reformat(Date time) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy hh:mm a");
+        return simpleDateFormat.format(time);
     }
 
     private void error(Exception e) {
         Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-    }
-
-    private void error(String e) {
-        Toast.makeText(this, e, Toast.LENGTH_LONG).show();
-    }
-
-    private class PhoneCallAdapter extends ArrayAdapter<PhoneCall> {
-        public PhoneCallAdapter(Context searchCustomer) {
-            super(searchCustomer, R.layout.activity_phone_bill_view);
-        }
-
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.activity_phone_bill_view, parent, false);
-            }
-
-            PhoneCall call = getItem(position);
-
-            EditText caller = convertView.findViewById(R.id.caller_adapter);
-            caller.setText("Caller: " + call.getCaller());
-
-            return convertView;
-        }
     }
 }

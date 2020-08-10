@@ -76,16 +76,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ReadMe() {
-        /*Dialog readMe = new Dialog(this);
-        readMe.setContentView(R.layout.dialog_readme);
-        readMe.setTitle("README");
-        readMe.show();*/
-
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setIcon(R.drawable.baseline_help_outline_24)
                 .setTitle("README")
                 .setMessage("This is a simple Android Phone Bill")
                 .setNegativeButton("Cancel", null)
-                .show();
+                .create();
+        dialog.show();
     }
 }
