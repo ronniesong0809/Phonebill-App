@@ -16,6 +16,8 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -162,6 +164,14 @@ public class SearchPhoneCalls extends AppCompatActivity {
             PhoneBill bill = parser.parse();
 
             setContentView(R.layout.activity_print_result);
+            FloatingActionButton goBackHome = findViewById(R.id.goBackHome);
+            goBackHome.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                }
+            });
+
             ListView listView = findViewById(R.id.result_list);
             ArrayList<String> callArray = new ArrayList<>();
 
