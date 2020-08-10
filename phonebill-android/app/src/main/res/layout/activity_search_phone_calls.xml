@@ -7,44 +7,50 @@
     tools:context=".SearchPhoneCalls">
 
     <EditText
-        android:id="@+id/customer"
+        android:id="@+id/customer_sc_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ronnie"
-        app:layout_constraintBottom_toTopOf="@+id/startTime_editText"
+        android:hint="@string/name_format"
+        app:layout_constraintBottom_toTopOf="@+id/startTime_sc_editText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:importantForAutofill="no"
+        android:inputType="date" />
 
     <EditText
-        android:id="@+id/startTime_editText"
+        android:id="@+id/startTime_sc_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1/1/1111 1:1 AM"
-        app:layout_constraintBottom_toTopOf="@+id/endTime_editText"
+        android:text="8/8/2020 1:1 AM"
+        app:layout_constraintBottom_toTopOf="@+id/endTime_sc_editText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customer" />
+        app:layout_constraintTop_toBottomOf="@+id/customer_sc_editText"
+        android:importantForAutofill="no"
+        android:inputType="date" />
 
     <EditText
-        android:id="@+id/endTime_editText"
+        android:id="@+id/endTime_sc_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2/2/2222 2:2 PM"
+        android:text="8/9/2020 11:1 PM"
         app:layout_constraintBottom_toTopOf="@+id/search_phone_calls_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startTime_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/startTime_sc_editText"
+        android:importantForAutofill="no"
+        android:inputType="date" />
 
     <Button
         android:id="@+id/search_phone_calls_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search"
-        app:layout_constraintTop_toBottomOf="@+id/endTime_editText"
+        android:text="@string/search"
+        app:layout_constraintTop_toBottomOf="@+id/endTime_sc_editText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
