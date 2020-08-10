@@ -94,10 +94,13 @@ public class MainActivity extends AppCompatActivity {
      * README alert dialog
      */
     public void ReadMe() {
+        String message = "Copyright (c) 2020 Ronnie Song\n\n";
+        message += "This is a simple Android Phone Bill that allows its users to creating a phone bill, entering calls, pretty printing a phone bill and its calls, searching for calls, etc.";
+
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setIcon(R.drawable.baseline_help_outline_24)
                 .setTitle("README")
-                .setMessage("This is a simple Android Phone Bill")
+                .setMessage(message)
                 .setNegativeButton("Cancel", null)
                 .create();
         dialog.show();
