@@ -60,19 +60,16 @@ public class SearchCustomer extends AppCompatActivity {
             TextParser parser = new TextParser(new FileReader(file));
             PhoneBill bill = parser.parse();
 
-            //alert(bill);
-
             setContentView(R.layout.activity_print_result);
-            Intent intent = new Intent(SearchCustomer.this, PrintResult.class);
-            intent.putExtra("PhoneBill", bill);
-            setResult(RESULT_OK, intent);
-            startActivity(intent);
             ListView listView = findViewById(R.id.result_list);
-            ArrayAdapter<PhoneCall> adapter = new PhoneCallAdapter(this);
+            ArrayList<String> callArray = new ArrayList<>();
 
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(SearchCustomer.this, android.R.layout.simple_list_item_1, callArray);
+            callArray.add(bill.getCustomer());
             for (PhoneCall call: bill.getPhoneCalls()) {
-                adapter.add(call);
+                callArray.add(call.toString());
             }
+            adapter.notifyDataSetChanged();
 
             listView.setAdapter(adapter);
 
