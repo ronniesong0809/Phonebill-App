@@ -37,6 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/search"
+        android:backgroundTint="@color/colorPrimaryLight"
+        android:textColor="#FFFFFF"
         app:layout_constraintTop_toBottomOf="@+id/customer_linear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

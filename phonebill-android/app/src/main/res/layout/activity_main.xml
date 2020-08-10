@@ -21,6 +21,7 @@
             android:id="@+id/search_customer_image"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            app:tint="@color/colorPrimaryLight"
             android:contentDescription="@string/search_customer"
             app:srcCompat="@drawable/baseline_person_search_24" />
 
@@ -28,6 +29,8 @@
             android:id="@+id/search_customer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryLight"
+            android:textColor="#FFFFFF"
             android:text="@string/search_customer" />
     </LinearLayout>
 
@@ -45,6 +48,7 @@
             android:id="@+id/add_phone_call_image"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            app:tint="@color/colorPrimaryLight"
             app:srcCompat="@drawable/baseline_add_ic_call_24"
             android:contentDescription="@string/add_phone_call" />
 
@@ -52,6 +56,8 @@
             android:id="@+id/add_phone_call"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryLight"
+            android:textColor="#FFFFFF"
             android:text="@string/add_phone_call" />
     </LinearLayout>
 
@@ -69,6 +75,7 @@
             android:id="@+id/search_phone_calls_image"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            app:tint="@color/colorPrimaryLight"
             app:srcCompat="@drawable/baseline_search_24"
             android:contentDescription="@string/search_phone_calls" />
 
@@ -76,6 +83,8 @@
             android:id="@+id/search_phone_calls"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryLight"
+            android:textColor="#FFFFFF"
             android:text="@string/search_phone_calls" />
     </LinearLayout>
 
