@@ -66,7 +66,7 @@ public class SearchCustomer extends AppCompatActivity {
                     finish();
                 }
             });
-            
+
             ListView listView = findViewById(R.id.result_list);
             ArrayList<String> callArray = new ArrayList<>();
 
