@@ -3,12 +3,17 @@ package edu.pdx.cs410j.qihao.phonebill_android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.io.File;
@@ -17,6 +22,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.NoSuchElementException;
 
@@ -29,18 +35,69 @@ public class SearchPhoneCalls extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_phone_calls);
 
+        final EditText startDate_et = findViewById(R.id.startDate_sc_editText);
+        startDate_et.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePick(startDate_et);
+            }
+        });
 
+        final EditText endDate_et = findViewById(R.id.endDate_sc_editText);
+        endDate_et.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePick(endDate_et);
+            }
+        });
+
+        final EditText startTime_et = findViewById(R.id.startTime_sc_editText);
+        startTime_et.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timePick(startTime_et);
+            }
+        });
+
+        final EditText endTime_et = findViewById(R.id.endTime_sc_editText);
+        endTime_et.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timePick(endTime_et);
+            }
+        });
 
         Button searchPhoneCalls = findViewById(R.id.search_phone_calls_button);
         searchPhoneCalls.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    EditText date1 = findViewById(R.id.startTime_sc_editText);
-                    String start = date1.getText().toString();
-                    EditText date2 = findViewById(R.id.endTime_sc_editText);
-                    String end = date2.getText().toString();
-                    search(start, end);
+                    EditText customer = findViewById(R.id.customer_sc_editText);
+                    String Customer = customer.getText().toString();
+
+                    EditText date1 = findViewById(R.id.startDate_sc_editText);
+                    String startDate = date1.getText().toString();
+                    EditText time1 = findViewById(R.id.startTime_sc_editText);
+                    String startTime = time1.getText().toString();
+
+                    EditText date2 = findViewById(R.id.endDate_sc_editText);
+                    String endDate = date2.getText().toString();
+                    EditText time2 = findViewById(R.id.endTime_sc_editText);
+                    String endTime = time2.getText().toString();
+
+                    if (Customer.equals("")) {
+                        throw new IllegalArgumentException("customer can't be empty.");
+                    } else if (startDate.equals("")) {
+                        throw new IllegalArgumentException("date1 can't be empty.");
+                    } else if (startTime.equals("")) {
+                        throw new IllegalArgumentException("time1 can't be empty.");
+                    } else if (endDate.equals("")) {
+                        throw new IllegalArgumentException("date2 can't be empty.");
+                    } else if (endTime.equals("")) {
+                        throw new IllegalArgumentException("time2 can't be empty.");
+                    }
+
+                    search(Customer, startDate + " " + startTime, endDate + " " + endTime);
                 } catch (NoSuchElementException | ParserException | IllegalArgumentException | IOException e) {
                     error(e);
                 }
@@ -48,14 +105,56 @@ public class SearchPhoneCalls extends AppCompatActivity {
         });
     }
 
-    @SuppressLint("SimpleDateFormat")
-    private void search(String date1, String date2) throws IOException, ParserException {
-        EditText customer = findViewById(R.id.customer_sc_editText);
-        String Customer = customer.getText().toString();
-        if (Customer.equals("")) {
-            throw new IllegalArgumentException("customer can't be empty.");
-        }
+    private void datePick(final EditText editText) {
+        final Calendar calendar = Calendar.getInstance();
+        int startYear = calendar.get(Calendar.YEAR);
+        int startMonth = calendar.get(Calendar.MONTH);
+        int startDay = calendar.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dialog = new DatePickerDialog(SearchPhoneCalls.this, new DatePickerDialog.OnDateSetListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, day);
 
+                @SuppressLint("SimpleDateFormat")
+                SimpleDateFormat format = new SimpleDateFormat("MM/dd/YYYY");
+                String date = format.format(calendar.getTime());
+                editText.setText(date);
+            }
+        }, startYear, startMonth, startDay);
+        dialog.show();
+    }
+
+    private void timePick(final EditText editText) {
+        final Calendar calendar = Calendar.getInstance();
+        int startHour = calendar.get(Calendar.HOUR_OF_DAY);
+        int startMinute = calendar.get(Calendar.MINUTE);
+        TimePickerDialog dialog = new TimePickerDialog(SearchPhoneCalls.this, new TimePickerDialog.OnTimeSetListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                calendar.set(Calendar.HOUR_OF_DAY, hour);
+                calendar.set(Calendar.MINUTE, minute);
+
+                @SuppressLint("SimpleDateFormat")
+                SimpleDateFormat format = new SimpleDateFormat("hh:mm a");
+                String time = format.format(calendar.getTime());
+                editText.setText(time);
+            }
+        }, startHour, startMinute, false);
+        dialog.show();
+    }
+
+    /**
+     * standard out PhoneBill in pretty format if between two times
+     * @param date1 start date
+     * @param date2 end date
+     * @throws IOException throws IO exception
+     */
+    @SuppressLint("SimpleDateFormat")
+    private void search(String Customer, String date1, String date2) throws IOException, ParserException, IllegalArgumentException {
         File dir = getDataDir();
         File file = new File(dir, Customer + ".txt");
         if (file.exists()) {
@@ -87,12 +186,11 @@ public class SearchPhoneCalls extends AppCompatActivity {
                     found++;
                 }
             }
-            if (found!=0) {
-                callArray.add(1, "There " + (found == 1 ? "is " : "are ") + found + " phone call" + (found == 1 ? "" : "s") + " found between " + date1 + " - " + date2 + ".");
+            callArray.add(1, "There " + (found == 1 ? "is " : "are ") + found + " phone call" + (found == 1 ? "" : "s") + " found between " + date1 + " - " + date2 + ".");
 
-                adapter.notifyDataSetChanged();
-                listView.setAdapter(adapter);
-            } else {
+            adapter.notifyDataSetChanged();
+            listView.setAdapter(adapter);
+            if (found==0) {
                 throw new NoSuchElementException("There is no phone call found between " + date1 + " - " + date2 + ".");
             }
         } else {
@@ -107,7 +205,7 @@ public class SearchPhoneCalls extends AppCompatActivity {
      * @param _date2 end time
      * @return return true or false
      */
-    private boolean betweenTwoTimes(PhoneCall call, String _date1, String _date2) {
+    private boolean betweenTwoTimes(PhoneCall call, String _date1, String _date2) throws IllegalArgumentException {
         Date date1 = parseDate(_date1);
         Date date2 = parseDate(_date2);
         validateStartTimeBeforeEndTime(date1, date2);

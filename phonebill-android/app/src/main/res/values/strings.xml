@@ -11,4 +11,10 @@
     <string name="caller_image">caller image</string>
     <string name="callee_image">callee image</string>
     <string name="search">Search</string>
+    <string name="start_sc_image">start sc image</string>
+    <string name="end_sc_image">end sc image</string>
+    <string name="search_customer">Search Customer</string>
+    <string name="add_phone_call">Add Phone Call</string>
+    <string name="search_phone_calls">Search Phone Calls</string>
+    <string name="readme">README</string>
 </resources>
