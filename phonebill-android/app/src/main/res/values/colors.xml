@@ -4,14 +4,4 @@
     <color name="colorPrimaryDark">#263238</color>
     <color name="colorPrimaryLight">#607D8B</color>
     <color name="colorAccent">#F9A825</color>
-
-    <color name="colorPrimary1">#1A84EE</color>
-    <color name="colorPrimaryDark1">#0454A2</color>
-    <color name="colorPrimaryLight1">#428BCA</color>
-    <color name="colorAccent1">#F9AA33</color>
-
-    <color name="colorPrimary2">#5D1049</color>
-    <color name="colorPrimaryDark2">#4E0D3A</color>
-    <color name="colorPrimaryLight2">#720D5D</color>
-    <color name="colorAccent2">#F7363E</color>
 </resources>
