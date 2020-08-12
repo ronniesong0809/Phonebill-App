@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -247,6 +248,10 @@ public class AddPhoneCall extends AppCompatActivity {
             text = "Unexpected error occurred!";
         }
         //Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-        Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG).show();
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG);
+        /*View snack = snackbar.getView();
+        TextView textView = (TextView) snack.findViewById(com.google.android.material.R.id.snackbar_text);
+        textView.setMaxLines(4);*/
+        snackbar.show();
     }
 }

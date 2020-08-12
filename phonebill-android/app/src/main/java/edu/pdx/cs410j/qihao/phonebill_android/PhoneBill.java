@@ -28,7 +28,7 @@ public class PhoneBill extends AbstractPhoneBill<PhoneCall> {
      */
     private String validateName(String customer) {
         if (customer.equals("")) {
-            throw new IllegalArgumentException("customer can't be empty.");
+            throw new IllegalArgumentException("Customer Name can't be empty.");
         }
         boolean valid = customer.matches("[a-zA-Z0-9]{3,12}|[a-zA-Z0-9]{3,12} [a-zA-Z0-9]{3,12}");
         if(valid) {

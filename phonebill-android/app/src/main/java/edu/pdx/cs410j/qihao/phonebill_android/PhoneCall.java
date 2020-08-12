@@ -38,7 +38,8 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
         Date startTime = parseDate(_startTime);
         Date endTime = parseDate(_endTime);
         if (startTime.after(endTime)){
-            throw new IllegalArgumentException("[" + _startTime + "] is after the [" + _endTime + "], make sure your phone call’s start time is before its end time!");
+            //throw new IllegalArgumentException("[" + _startTime + "] is after the [" + _endTime + "], make sure your phone call’s start time is before its end time!");
+            throw new IllegalArgumentException("Make sure the call’s start time is before its end time!");
         }
     }
 
@@ -49,7 +50,7 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
      */
     private String validatePhoneNumber(String number) {
         if (number.equals("")) {
-            throw new IllegalArgumentException("number can't be empty.");
+            throw new IllegalArgumentException("Phone Number can't be empty.");
         }
         boolean valid = number.matches("^\\d{3}-\\d{3}-\\d{4}$");
         if(valid) {
@@ -66,7 +67,7 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
      */
     private String validateDate(String date) {
         if (date.equals("")) {
-            throw new IllegalArgumentException("date can't be empty.");
+            throw new IllegalArgumentException("Date can't be empty.");
         }
         boolean valid = date.matches("^(0?[1-9]|1[012])/(0?[1-9]|1\\d|2\\d|3[01])/(\\d{4})$");
         if(valid) {
@@ -83,7 +84,7 @@ public class PhoneCall extends AbstractPhoneCall implements Comparable<PhoneCall
      */
     private String validateTime(String time) {
         if (time.equals("")) {
-            throw new IllegalArgumentException("time can't be empty.");
+            throw new IllegalArgumentException("Time can't be empty.");
         }
         boolean valid = time.matches("^(0?\\d|1[0-2]):(0?\\d|1\\d|2\\d|3\\d|4\\d|5\\d) (AM|PM|am|pm)$");
         if(valid) {
