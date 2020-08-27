@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ronsong.phonebill_android.SearchPhoneCalls">
+
+    <LinearLayout
+        android:id="@+id/customer_sc_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/startTime_sc_linear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/customer_sc_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/name_format"
+            android:importantForAutofill="no"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/startTime_sc_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/endTime_sc_linear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customer_sc_linear">
+
+        <ImageView
+            android:id="@+id/startDate_sc_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/baseline_date_range_24"
+            android:contentDescription="@string/start_sc_image" />
+
+        <EditText
+            android:id="@+id/startDate_sc_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:focusable="false"
+            android:hint="@string/date_format"
+            android:importantForAutofill="no" />
+
+        <ImageView
+            android:id="@+id/startTime_sc_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/baseline_access_time_24"
+            android:contentDescription="@string/start_sc_image" />
+
+        <EditText
+            android:id="@+id/startTime_sc_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:focusable="false"
+            android:hint="@string/time_format"
+            android:importantForAutofill="no" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/endTime_sc_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/search_phone_calls_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startTime_sc_linear">
+
+        <ImageView
+            android:id="@+id/endDate_sc_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/baseline_date_range_24"
+            android:contentDescription="@string/end_sc_image" />
+
+        <EditText
+            android:id="@+id/endDate_sc_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:focusable="false"
+            android:hint="@string/date_format"
+            android:importantForAutofill="no" />
+
+        <ImageView
+            android:id="@+id/endTime_sc_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/baseline_access_time_24"
+            android:contentDescription="@string/end_sc_image" />
+
+        <EditText
+            android:id="@+id/endTime_sc_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="time"
+            android:focusable="false"
+            android:hint="@string/time_format"
+            android:importantForAutofill="no" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/search_phone_calls_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search"
+        android:backgroundTint="@color/colorPrimaryLight"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/endTime_sc_linear" />
+</androidx.constraintlayout.widget.ConstraintLayout>

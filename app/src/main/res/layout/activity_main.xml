@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ronsong.phonebill_android.MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/search_customer_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/add_phone_call_linear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/search_customer_image"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:tint="@color/colorPrimaryLight"
+            android:contentDescription="@string/search_customer"
+            app:srcCompat="@drawable/baseline_person_search_24" />
+
+        <Button
+            android:id="@+id/search_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryLight"
+            android:textColor="#FFFFFF"
+            android:text="@string/search_customer" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/add_phone_call_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/search_phone_linear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_customer_linear">
+
+        <ImageView
+            android:id="@+id/add_phone_call_image"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:tint="@color/colorPrimaryLight"
+            app:srcCompat="@drawable/baseline_add_ic_call_24"
+            android:contentDescription="@string/add_phone_call" />
+
+        <Button
+            android:id="@+id/add_phone_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryLight"
+            android:textColor="#FFFFFF"
+            android:text="@string/add_phone_call" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/search_phone_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_phone_call_linear">
+
+        <ImageView
+            android:id="@+id/search_phone_calls_image"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:tint="@color/colorPrimaryLight"
+            app:srcCompat="@drawable/baseline_search_24"
+            android:contentDescription="@string/search_phone_calls" />
+
+        <Button
+            android:id="@+id/search_phone_calls"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorPrimaryLight"
+            android:textColor="#FFFFFF"
+            android:text="@string/search_phone_calls" />
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/read_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:contentDescription="@string/readme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:tint="#FFFFFF"
+        app:srcCompat="@drawable/baseline_help_outline_24" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
